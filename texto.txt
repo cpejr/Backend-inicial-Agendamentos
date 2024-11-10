@@ -1,0 +1,3 @@
+sLKdVuISHIcWEGad
+mongodb+srv://rcampellosoares243:sLKdVuISHIcWEGad@clusternode.ziuld.mongodb.net/
+mongodb+srv://rcampellosoares243:<db_password>@clusternode.ziuld.mongodb.net/
