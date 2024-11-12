@@ -3,11 +3,13 @@ const UsuarioModel = require("../Models/UsuarioModel");
 class UsuarioController {
     
     async create(req, res){
-        const usuario = await UsuarioModel.create(req.body);
+        try{ const usuario = await UsuarioModel.create(req.body);
 
-        return res.status(200).json(usuario);
+            return res.status(200).json(usuario);
+        }catch(error){
+            res.status(500).json({message: "Deu ruim aqui!!"})
+        }
     }
-    
     async read(req, res){
         const usuarios = await UsuarioModel.find();
 
