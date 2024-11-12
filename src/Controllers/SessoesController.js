@@ -1,5 +1,4 @@
 const SessoesModel = require("../Models/SessoesModel");
-const UsuarioModel = require("../Models/UsuarioModel");
 
 class SessoesController {
     async create(req, res){
@@ -31,8 +30,6 @@ class SessoesController {
        
     }
 }
-
-
 
 
 module.exports = new SessoesController();
