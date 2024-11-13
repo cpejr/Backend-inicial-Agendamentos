@@ -2,9 +2,15 @@ const SessoesModel = require("../Models/SessoesModel");
 
 class SessoesController {
     async create(req, res){
-        const sessoes = await SessoesModel.create(req.body);
+        try{    
+            const sessoes = await SessoesModel.create(req.body);
 
-        return res.status(200).json(sessoes);
+            return res.status(200).json(sessoes);
+        }catch(error){
+            res
+                .status(500)
+                .json({message: "Deu ruim aqui!!"})
+        }
     }
     
     async read(req, res){
