@@ -1,9 +1,13 @@
+import Home from "./Pages/Home/Home"
+import Login from "./Pages/Login/Login"
+import Cadastro from "./Pages/Cadastro/Cadastro"
+import Routes from "./routes"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
       <div>
+        <Routes/>
       </div>
   )
 }
