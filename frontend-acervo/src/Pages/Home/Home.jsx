@@ -1,21 +1,43 @@
-import BotaoPadrao from "../../Components/BotaoPadrao/BotaoPadrao";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Container, StyledCarousel } from "./Styles";
 
-function Home(){
-
-    const navigate = useNavigate();
-    return (
-
+const Home = () => {
+  return (
+    <Container>
+      <StyledCarousel
+        showThumbs={false}
+        infiniteLoop
+        autoPlay
+        interval={3000}
+        showStatus={false}
+        emulateTouch
+      >
         <div>
-            ESSA É A PÁGINA HOME
-            <BotaoPadrao
-            onClick={() => navigate("/login")}
-            >
-
-            </BotaoPadrao>
-
+          <img
+            src="https://via.placeholder.com/800x400"
+            alt="Slide 1"
+          />
+          <p className="legend">Sobre a Empresa - Slide 1</p>
         </div>
-    )
-}
+        <div>
+          <img
+            src="https://via.placeholder.com/800x400"
+            alt="Slide 2"
+          />
+          <p className="legend">Sobre a Empresa - Slide 2</p>
+        </div>
+        <div>
+          <img
+            src="https://via.placeholder.com/800x400"
+            alt="Slide 3"
+          />
+          <p className="legend">Sobre a Empresa - Slide 3</p>
+        </div>
+      </StyledCarousel>
+    </Container>
+  );
+};
 
 export default Home;

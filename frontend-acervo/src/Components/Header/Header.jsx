@@ -1,3 +1,13 @@
+import Logo from "./cpe-logo.png"
+import React from "react"
+import { HeaderContainer, LogoContainer} from "./Styles";
+
 export default function Header() {
-    return <h3>Header</h3>;
+    return (
+        <HeaderContainer>
+            <LogoContainer>
+                <img src={Logo} alt="Logo" />;
+            </LogoContainer>
+        </HeaderContainer>
+    );
 }
