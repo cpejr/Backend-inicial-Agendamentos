@@ -3,36 +3,35 @@ const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-
 const UsuarioSchema = new Schema({
-    email : {
+    email: {
         type: String,
         unique: true,
+        required: true
     },
-    senha : String,
-    nome : {
+    senha: {
         type: String,
-        select: false,
+        required: true,
+        select: false 
     },
-    cargo : String,
-    status : String
-})
-
-UsuarioSchema.pre("save", async function(next) {
-    const user = this
-
-    if(user.isModified("senha")) {
-        const salt = await bcrypt.genSalt();
-        const hash = await bcrypt.hash(user.senha, salt);
-
-        user.senha = hash;
-
-        console.log({ salt, hash });
-
+    nome: {
+        type: String,
+        required: true
+    },
+    tipo: {
+        type: Number, // 0 = Cliente, 1 = Profissional, 2 = Administrador
+        required: true,
+        enum: [0, 1, 2]
     }
-    
-    next()
-})
+});
+
+UsuarioSchema.pre("save", async function (next) {
+    if (this.isModified("senha")) {
+        const salt = await bcrypt.genSalt(10);
+        this.senha = await bcrypt.hash(this.senha, salt);
+    }
+    next();
+});
 
 const UsuarioModel = mongoose.model('usuarios', UsuarioSchema);
 

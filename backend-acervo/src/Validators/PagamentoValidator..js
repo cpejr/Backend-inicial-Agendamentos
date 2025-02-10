@@ -4,12 +4,10 @@ const {validateRequest} = require("zod-express-middleware");
 
 const creat = validateRequest({
     body: z.object({
-        nome: z.string({ required_error: "O nome é obrigatório"}),
-        email: z
-            .string({ required_error: "O email é obrigatório"})
-            .email("O email é inválido"),
-        senha: z.string({ required_error: "O senha é obrigatório"}),
-        tipo: z.string({ required_error: "O tipo é obrigatório"}),
+        usuario_id: z.custom(mongoose.isValidObjectId, "O id de usuario não é válido"),
+        valor: z.string({ required_error: "O valor é obrigatório"}),
+        data: z.string({ required_error: "A data é obrigatório"}),
+        metodo: z.string({ required_error: "O metodo é obrigatório"}),
     }),
 });
 
@@ -21,10 +19,8 @@ const destroy = validateRequest({
 
 const update = validateRequest({
     body: z.object({
-        nome: z.string().optional(),
-        email: z.string().email("O email é inválido").optional(),
-        senha: z.string().optional(),
-        tipo: z.string().optional(),
+        valor: z.string().optional(),
+        metodo: z.string().optional(),
     }),
     params: z.object({
         id: z.custom(mongoose.isValidObjectId, "O id não é valido"),

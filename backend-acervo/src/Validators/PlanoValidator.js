@@ -9,7 +9,8 @@ const creat = validateRequest({
             .string({ required_error: "O email é obrigatório"})
             .email("O email é inválido"),
         senha: z.string({ required_error: "O senha é obrigatório"}),
-        tipo: z.string({ required_error: "O tipo é obrigatório"}),
+        cargo: z.string({ required_error: "O cargo é obrigatório"}),
+        status: z.string({ required_error: "O status é obrigatório"}),
     }),
 });
 
@@ -24,7 +25,8 @@ const update = validateRequest({
         nome: z.string().optional(),
         email: z.string().email("O email é inválido").optional(),
         senha: z.string().optional(),
-        tipo: z.string().optional(),
+        cargo: z.string().optional(),
+        status: z.string().optional(),
     }),
     params: z.object({
         id: z.custom(mongoose.isValidObjectId, "O id não é valido"),
