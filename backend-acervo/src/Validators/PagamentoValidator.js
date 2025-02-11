@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 const { z } = require("zod");
 const {validateRequest} = require("zod-express-middleware");
 
-const creat = validateRequest({
+const create = validateRequest({
     body: z.object({
         usuario_id: z.custom(mongoose.isValidObjectId, "O id de usuario não é válido"),
         valor: z.string({ required_error: "O valor é obrigatório"}),
@@ -28,7 +28,7 @@ const update = validateRequest({
 });
 
 module.exports = {
-    creat,
+    create,
     destroy,
     update,
 };

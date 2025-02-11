@@ -9,20 +9,18 @@ const AulaSchema = new Schema({
         unique: true,
     },
 
+    horario : {
+        type: String,
+        required : true,
+    },
     duracao : {
         type: Number,
-        request : true,
+        required : true,
     },
 
     capacidade : {
         type : Number,
-        request : true,
-    },
-
-    tipo : {
-        type : Number,
-        request : true,
-        enum : [0, 1, 2],// exemplo 0 = yoga, 1 = karatê, 2 = catequese
+        required : true,
     },
 
     professor_id: {
@@ -32,11 +30,11 @@ const AulaSchema = new Schema({
     },
     data: {
         type: Date,
-        require: true,
+        required: true,
     }
 });
 
 
-const AulaModel = mongoose.model('Aulas', AulaSchema);
+const AulaModel = mongoose.model('aulas', AulaSchema);
 
 module.exports = AulaModel;

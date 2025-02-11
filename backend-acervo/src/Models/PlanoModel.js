@@ -1,40 +1,23 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-
-const ProfessorShema = new Schema({
-    nome : {
+const PlanoSchema = new Schema({
+    nome: {
         type: String,
-        select: false,
+        required: true,
     },
-    preco : {
+    preco: {
         type: Number,
-        require: true,
+        required: true, 
     },
-    creditos : {
+    creditos: {
         type: Number,
-        require: true,
+        required: true, 
     }
-})
+});
 
-ProfessorShema.pre("save", async function(next) {
-    const user = this
 
-    if(user.isModified("senha")) {
-        const salt = await bcrypt.genSalt();
-        const hash = await bcrypt.hash(user.senha, salt);
+const PlanoModel = mongoose.model('planos', PlanoSchema);
 
-        user.senha = hash;
-
-        console.log({ salt, hash });
-
-    }
-    
-    next()
-})
-
-const ProfessorModel = mongoose.model('usuarios', ProfessorModel);
-
-module.exports = ProfessorModel;
+module.exports = PlanoModel;

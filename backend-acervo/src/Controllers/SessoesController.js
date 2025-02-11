@@ -32,7 +32,7 @@ class SessoesController {
        
        await SessoesModel.findByIdAndDelete(id);
 
-       return res.status(200).json({"mensagem": "Sessão deletada com sucesso"});
+       return res.status(200).json({mensagem: "Sessão deletada com sucesso"});
        
     }
 }

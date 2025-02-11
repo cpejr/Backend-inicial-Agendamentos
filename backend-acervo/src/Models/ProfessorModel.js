@@ -34,6 +34,6 @@ ProfessorSchema.pre("save", async function(next) {
     next()
 })
 
-const ProfessorModel = mongoose.model('usuarios', ProfessorSchema);
+const ProfessorModel = mongoose.model('professores', ProfessorSchema);
 
 module.exports = ProfessorModel;
