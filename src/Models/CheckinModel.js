@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CheckinSchema = new Schema({
-    agendamento_id: {
+    scheduling_id: {
         type: Schema.Types.ObjectId,
-        ref: "agendamentos",
+        ref: "schedulings",
         required: true,
     },
-    horario: {
+    time: {
         type: Date,
         required: true,
         default: Date.now, 

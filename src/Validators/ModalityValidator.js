@@ -1,25 +1,25 @@
 const { default: mongoose } = require("mongoose");
 const { z } = require("zod");
-const {validateRequest} = require("zod-express-middleware");
+const { validateRequest } = require("zod-express-middleware");
 
 const create = validateRequest({
     body: z.object({
-        nome: z.string({ required_error: "O nome é obrigatório"}),
+        name: z.string({ required_error: "Name is required" }),
     }),
 });
 
 const destroy = validateRequest({
     params: z.object({
-        id: z.custom(mongoose.isValidObjectId, "O id não é valido"),
+        id: z.custom(mongoose.isValidObjectId, "Invalid id"),
     }),
 });
 
 const update = validateRequest({
     body: z.object({
-        nome: z.string().optional(),
+        name: z.string().optional(),
     }),
     params: z.object({
-        id: z.custom(mongoose.isValidObjectId, "O id não é valido"),
+        id: z.custom(mongoose.isValidObjectId, "Invalid id"),
     }),
 });
 

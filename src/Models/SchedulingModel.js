@@ -2,23 +2,23 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const AgendamentoSchema = new Schema({
-    usuario_id: {
+const SchedulingSchema = new Schema({
+    user_id: {
         type: Schema.Types.ObjectId,
-        ref: "usuarios",
+        ref: "users",
         required: true,
     },
-    aula_id: {
+    class_id: {
         type: Schema.Types.ObjectId,
-        ref: "aulas",
+        ref: "classes",
         required: true,
     },
-    data: {
+    date: {
         type: Date,
         required: true,
     }
 });
 
-const AgendamentoModel = mongoose.model("agendamentos", AgendamentoSchema);
+const SchedulingModel = mongoose.model("schedulings", SchedulingSchema);
 
-module.exports = AgendamentoModel;
+module.exports = SchedulingModel;

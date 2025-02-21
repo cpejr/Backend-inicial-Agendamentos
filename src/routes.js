@@ -1,97 +1,97 @@
 const { Router } = require("express");
 
 //Controllers
-const AgendamentoController = require("./Controllers/AgendamentoController");
-const AulaController = require("./Controllers/AulaController");
+const SchedulingController = require("./Controllers/SchedulingController");
+const ClassController = require("./Controllers/ClassController");
 const AuthController = require("./Controllers/AuthController");
-const CalendarioController = require("./Controllers/CalendarioController");
+const CalendarController = require("./Controllers/CalendarController");
 const CheckinController = require("./Controllers/CheckinController");
-const ModalidadeController = require("./Controllers/ModalidadeController");
-const PagamentoController = require("./Controllers/PagamentoController");
-const PlanoController = require("./Controllers/PlanoController");
-const ProfessorController = require("./Controllers/ProfessorController");
-const SessoesController = require("./Controllers/SessoesController");
-const UsuarioController = require("./Controllers/UsuarioController");
+const ModalityController = require("./Controllers/ModalityController");
+const PaymentController = require("./Controllers/PaymentController");
+const PlanController = require("./Controllers/PlanController");
+const TeacherController = require("./Controllers/TeacherController");
+const SessionController = require("./Controllers/SessionController");
+const UserController = require("./Controllers/UserController");
 
 //Validators
-const AgendamentoValidator= require("./Validators/AgendamentoValidator");
-const AulaValidator = require("./Validators/AulaValidator");
+const SchedulingValidator= require("./Validators/SchedulingValidator");
+const ClassValidator = require("./Validators/ClassValidator");
 const AuthValidator = require("./Validators/AuthValidator");
-const CalendarioValidator = require("./Validators/CalendarioValidator");
+const CalendarValidator = require("./Validators/CalendarValidator");
 const CheckinValidator = require("./Validators/CheckinValidator");
-const ModalidadeValidator = require("./Validators/ModalidadeValidator");
-const PagamentoValidator = require("./Validators/PagamentoValidator");
-const PlanoValidator = require("./Validators/PlanoValidator");
-const ProfessorValidator = require("./Validators/ProfessorValidator");
-const SessoesValidator = require("./Validators/SessoesValidator");
-const UsuarioValidator = require("./Validators/UsuarioValidator");
+const ModalityValidator = require("./Validators/ModalityValidator");
+const PaymentValidator = require("./Validators/PaymentValidator");
+const PlanValidator = require("./Validators/PlanValidator");
+const TeacherValidator = require("./Validators/TeacherValidator");
+const SessionValidator = require("./Validators/SessionValidator");
+const UserValidator = require("./Validators/UserValidator");
 
-const rotas = Router();
+const routes = Router();
 
 
-//agendamentos
-rotas.post('/agendamentos', AgendamentoValidator.create, AgendamentoController.create);
-rotas.get('/agendamentos', AgendamentoController.read);
-rotas.delete('/agendamentos/:id',AgendamentoValidator.destroy, AgendamentoController.delete);
-rotas.put('/agendamentos/:id',AgendamentoValidator.update, AgendamentoController.update);
+//appointments
+routes.post('/scheduling', SchedulingValidator.create, SchedulingController.create);
+routes.get('/scheduling', SchedulingController.read);
+routes.delete('/scheduling/:id',SchedulingValidator.destroy, SchedulingController.delete);
+routes.put('/scheduling/:id',SchedulingValidator.update, SchedulingController.update);
 
-//aulas
-rotas.post('/aulas', AulaValidator.create, AulaController.create);
-rotas.get('/aulas', AulaController.read);
-rotas.delete('/aulas/:id',AulaValidator.destroy, AulaController.delete);
-rotas.put('/aulas/:id',AulaValidator.update, AulaController.update);
+//classes
+routes.post('/classes', ClassValidator.create, ClassController.create);
+routes.get('/classes', ClassController.read);
+routes.delete('/classes/:id',ClassValidator.destroy, ClassController.delete);
+routes.put('/classes/:id',ClassValidator.update, ClassController.update);
 
-//calendarios
-rotas.post('/calendarios', CalendarioValidator.create, CalendarioController.create);
-rotas.get('/calendarios', CalendarioController.read);
-rotas.delete('/calendarios/:id',CalendarioValidator.destroy, CalendarioController.delete);
-rotas.put('/calendarios/:id',CalendarioValidator.update, CalendarioController.update);
+//calendars
+routes.post('/calendars', CalendarValidator.create, CalendarController.create);
+routes.get('/calendars', CalendarController.read);
+routes.delete('/calendars/:id',CalendarValidator.destroy, CalendarController.delete);
+routes.put('/calendars/:id',CalendarValidator.update, CalendarController.update);
 
 //checkins
-rotas.post('/checkins', CheckinValidator.create, CheckinController.create);
-rotas.get('/checkins', CheckinController.read);
-rotas.delete('/checkins/:id',CheckinValidator.destroy, CheckinController.delete);
-rotas.put('/checkins/:id',CheckinValidator.update, CheckinController.update);
+routes.post('/checkins', CheckinValidator.create, CheckinController.create);
+routes.get('/checkins', CheckinController.read);
+routes.delete('/checkins/:id',CheckinValidator.destroy, CheckinController.delete);
+routes.put('/checkins/:id',CheckinValidator.update, CheckinController.update);
 
-//modalidades
-rotas.post('/modalidades', ModalidadeValidator.create, ModalidadeController.create);
-rotas.get('/modalidades', ModalidadeController.read);
-rotas.delete('/modalidades/:id',ModalidadeValidator.destroy, ModalidadeController.delete);
-rotas.put('/modalidades/:id',ModalidadeValidator.update, ModalidadeController.update);
+//modalities
+routes.post('/modalities', ModalityValidator.create, ModalityController.create);
+routes.get('/modalities', ModalityController.read);
+routes.delete('/modalities/:id',ModalityValidator.destroy, ModalityController.delete);
+routes.put('/modalities/:id',ModalityValidator.update, ModalityController.update);
 
-//pagamentos
-rotas.post('/pagamentos', PagamentoValidator.create, PagamentoController.create);
-rotas.get('/pagamentos', PagamentoController.read);
-rotas.delete('/pagamentos/:id',PagamentoValidator.destroy, PagamentoController.delete);
-rotas.put('/pagamentos/:id',PagamentoValidator.update, PagamentoController.update);
+//payments
+routes.post('/payments', PaymentValidator.create, PaymentController.create);
+routes.get('/payments', PaymentController.read);
+routes.delete('/payments/:id',PaymentValidator.destroy, PaymentController.delete);
+routes.put('/payments/:id',PaymentValidator.update, PaymentController.update);
 
-//planos
-rotas.post('/planos', PlanoValidator.create, PlanoController.create);
-rotas.get('/planos', PlanoController.read);
-rotas.delete('/planos/:id',PlanoValidator.destroy, PlanoController.delete);
-rotas.put('/planos/:id',PlanoValidator.update, PlanoController.update);
-
-
-//professores
-rotas.post('/professores', ProfessorValidator.create, ProfessorController.create);
-rotas.get('/professores', ProfessorController.read);
-rotas.delete('/professores/:id',ProfessorValidator.destroy, ProfessorController.delete);
-rotas.put('/professores/:id',ProfessorValidator.update, ProfessorController.update);
-
-//SESSOES
-rotas.post('/sessoes', SessoesValidator.create, SessoesController.create);
-rotas.get('/sessoes', SessoesController.read);
-rotas.delete('/sessoes/:id', SessoesValidator.destroy, SessoesController.delete);
-
-//USUARIOS
-rotas.post('/usuarios', UsuarioValidator.create, UsuarioController.create);
-rotas.get('/usuarios', UsuarioController.read);
-rotas.delete('/usuarios/:id',UsuarioValidator.destroy, UsuarioController.delete);
-rotas.put('/usuarios/:id',UsuarioValidator.update, UsuarioController.update);
+//plans
+routes.post('/plans', PlanValidator.create, PlanController.create);
+routes.get('/plans', PlanController.read);
+routes.delete('/plans/:id',PlanValidator.destroy, PlanController.delete);
+routes.put('/plans/:id',PlanValidator.update, PlanController.update);
 
 
+//teachers
+routes.post('/teachers', TeacherValidator.create, TeacherController.create);
+routes.get('/teachers', TeacherController.read);
+routes.delete('/teachers/:id',TeacherValidator.destroy, TeacherController.delete);
+routes.put('/teachers/:id',TeacherValidator.update, TeacherController.update);
+
+//sessions
+routes.post('/sessions', SessionValidator.create, SessionController.create);
+routes.get('/sessions', SessionController.read);
+routes.delete('/sessions/:id', SessionValidator.destroy, SessionController.delete);
+
+//users
+routes.post('/users', UserValidator.create, UserController.create);
+routes.get('/users', UserController.read);
+routes.delete('/users/:id',UserValidator.destroy, UserController.delete);
+routes.put('/users/:id',UserValidator.update, UserController.update);
 
 
-rotas.post("/login", AuthValidator.login, AuthController.login);
 
-module.exports = rotas;
+
+routes.post("/login", AuthValidator.login, AuthController.login);
+
+module.exports = routes;

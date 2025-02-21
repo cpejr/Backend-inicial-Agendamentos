@@ -1,21 +1,21 @@
 const { default: mongoose } = require("mongoose");
 const { z } = require("zod");
-const {validateRequest} = require("zod-express-middleware");
+const { validateRequest } = require("zod-express-middleware");
 
 const create = validateRequest({
     body: z.object({
-        id_usuario:  z.custom(
+        user_id: z.custom(
             mongoose.isValidObjectId, 
-            "O id não é valido"
+            "Invalid id"
         ),
     }),
 });
 
 const destroy = validateRequest({
     params: z.object({
-        id:  z.custom(
+        id: z.custom(
             mongoose.isValidObjectId, 
-            "O id da sessão não é valido"
+            "Invalid session id"
         ),
     }),
 });
@@ -24,6 +24,3 @@ module.exports = {
     create,
     destroy,
 };
-
-
-
