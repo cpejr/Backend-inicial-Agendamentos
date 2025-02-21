@@ -11,7 +11,7 @@ class UserController {
         } catch(error) {
             res
                 .status(500)
-                .json({message: "Something went wrong!", error:error.message });
+                .json({message: "Error while creating user!", error:error.message });
         }
     }
     async read(req, res){ 
@@ -21,7 +21,7 @@ class UserController {
         }catch(error){
             res
                 .status(500)
-                .json({message: "Something went wrong!"})
+                .json({message: "Error while creating user!"})
         }
     }
     
@@ -39,7 +39,7 @@ class UserController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating user!", error: error.message});
         }
     }
     
@@ -57,7 +57,7 @@ class UserController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating user!", error: error.message});
         }
     }
 }

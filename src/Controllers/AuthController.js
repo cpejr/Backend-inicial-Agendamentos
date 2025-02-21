@@ -24,7 +24,7 @@ class AuthController {
         } catch (error) {
             res
                 .status(500)
-                .json({message: "Something went wrong!", error:error.message})
+                .json({message: "Error while creating user", error: error.message});
             
         }
 
