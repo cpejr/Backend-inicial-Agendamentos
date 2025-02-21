@@ -2,22 +2,21 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const PlanoSchema = new Schema({
-    nome: {
+const PlanSchema = new Schema({
+    name: {
         type: String,
         required: true,
     },
-    preco: {
+    price: {
         type: Number,
         required: true, 
     },
-    creditos: {
+    credits: {
         type: Number,
         required: true, 
     }
 });
 
+const PlanModel = mongoose.model('plans', PlanSchema);
 
-const PlanoModel = mongoose.model('planos', PlanoSchema);
-
-module.exports = PlanoModel;
+module.exports = PlanModel;

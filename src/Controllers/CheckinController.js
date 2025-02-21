@@ -8,7 +8,7 @@ class CheckinController {
         } catch(error) {
             res
                 .status(500)
-                .json({message: "Deu ruim aqui!!", error:error.message });
+                .json({message: "Something went wrong!", error:error.message });
         }
     }
     async read(req, res){ 
@@ -18,25 +18,25 @@ class CheckinController {
         }catch(error){
             res
                 .status(500)
-                .json({message: "Deu ruim aqui!!"})
+                .json({message: "Something went wrong!"})
         }
     }
     
     async update(req, res){
     try{
         const { id } = req.params;
-        const CheckinsEncontrado = await CheckinModel.findById(id);
+        const foundCheckin = await CheckinModel.findById(id);
 
-        if(!CheckinsEncontrado)
-            return res.status(404).json({message: "Usuário não encontrado"});
+        if(!foundCheckin)
+            return res.status(404).json({message: "User not found"});
 
-        const Checkin = await CheckinsEncontrado.set(req.body).save();
+        const Checkin = await foundCheckin.set(req.body).save();
         
         return res.status(200).json(Checkin);
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Deu ruim aqui!!", error: error.message});
+                .json({ message: "Something went wrong!", error: error.message});
         }
     }
     
@@ -44,20 +44,19 @@ class CheckinController {
         try{
             const { id } = req.params;
 
-            const CheckinsEncontrado = await CheckinModel.findById(id);
-            if(!CheckinsEncontrado)
-                return res.status(404).json({message: "Usuário não encontrado"});
+            const foundCheckin = await CheckinModel.findById(id);
+            if(!foundCheckin)
+                return res.status(404).json({message: "User not found"});
     
-            await CheckinsEncontrado.deleteOne();
+            await foundCheckin.deleteOne();
             
-            return res.status(200).json({ message: "Usuário deletado com sucesso"});
+            return res.status(200).json({ message: "User deleted successfully"});
             } catch (error) {
                 res
                     .status(500)
-                    .json({ message: "Deu ruim aqui!!", error: error.message});
+                    .json({ message: "Something went wrong!", error: error.message});
             }
+    }
 }
-}
-
 
 module.exports = new CheckinController();

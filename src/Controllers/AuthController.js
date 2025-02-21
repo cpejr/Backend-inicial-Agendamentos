@@ -1,4 +1,4 @@
-const UsuarioModel = require("../Models/UsuarioModel");
+const UserModel = require("../Models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -6,15 +6,15 @@ class AuthController {
     async login(req, res) {
         try {
             const{ email, senha } = req.body;
-            const usuarioEncontrado = await UsuarioModel.findOne({email}).select("+senha");
-            if (!usuarioEncontrado) 
-                return res.status(403).json({message: "E-mail ou senha não esncontrados"});
+            const foundUser = await UserModel.findOne({email}).select("+senha");
+            if (!foundUser) 
+                return res.status(403).json({message: "Email or password not found"});
             
-            const ehCorrespondente = await bcrypt.compare(senha, usuarioEncontrado.senha);
-            if (!ehCorrespondente)
-                return res.status(403).json({ message: "E-mail ou senha inválidos"});
+            const isMatch = await bcrypt.compare(senha, foundUser.senha);
+            if (!isMatch)
+                return res.status(403).json({ message: "Invalid email or password"});
 
-                const { senha: hashdSenha, ...payload } = usuarioEncontrado.toObject();
+                const { senha: hashedPassword, ...payload } = foundUser.toObject();
 
             const token = await jwt.sign({
                 payload
@@ -24,7 +24,7 @@ class AuthController {
         } catch (error) {
             res
                 .status(500)
-                .json({message: "Deu ruim aqui!!", error:error.message})
+                .json({message: "Something went wrong!", error:error.message})
             
         }
 

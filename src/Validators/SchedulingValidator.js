@@ -4,7 +4,7 @@ const { validateRequest } = require("zod-express-middleware");
 
 const create = validateRequest({
     body: z.object({
-        scheduling_id: z.string().refine(mongoose.isValidObjectId, "Invalid scheduling id"),
+        user_id: z.string().refine(mongoose.isValidObjectId, "Invalid user id"),
         class_id: z.string().refine(mongoose.isValidObjectId, "Invalid class id"),
         date: z.coerce.date({ required_error: "Date is required" }),
     }),

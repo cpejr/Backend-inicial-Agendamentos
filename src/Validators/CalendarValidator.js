@@ -4,22 +4,22 @@ const { validateRequest } = require("zod-express-middleware");
 
 const create = validateRequest({
     body: z.object({
-        professor_id: z.string().refine(mongoose.isValidObjectId, "O id do professor é inválido"),
+        teacher_id: z.string().refine(mongoose.isValidObjectId, "Invalid teacher id"),
     }),
 });
 
 const destroy = validateRequest({
     params: z.object({
-        id: z.string().refine(mongoose.isValidObjectId, "O id não é válido"),
+        id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
     }),
 });
 
 const update = validateRequest({
     body: z.object({
-        professor_id: z.string().refine(mongoose.isValidObjectId, "O id do professor é inválido").optional(),
+        teacher_id: z.string().refine(mongoose.isValidObjectId, "Invalid teacher id").optional(),
     }),
     params: z.object({
-        id: z.string().refine(mongoose.isValidObjectId, "O id não é válido"),
+        id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
     }),
 });
 
