@@ -8,7 +8,7 @@ class PaymentController {
         } catch(error) {
             res
                 .status(500)
-                .json({message: "Something went wrong!", error:error.message });
+                .json({message: "Error while creating payment!", error:error.message });
         }
     }
     async read(req, res){ 
@@ -18,7 +18,7 @@ class PaymentController {
         }catch(error){
             res
                 .status(500)
-                .json({message: "Something went wrong!"})
+                .json({message: "Error while creating payment!"})
         }
     }
     
@@ -36,7 +36,7 @@ class PaymentController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating payment!", error: error.message});
         }
     }
     
@@ -54,7 +54,7 @@ class PaymentController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating payment!", error: error.message});
         }
     }
 }

@@ -9,7 +9,7 @@ class SessionController {
         }catch(error){
             res
                 .status(500)
-                .json({message: "Something went wrong!"})
+                .json({message: "Error while creating session!"})
         }
     }
     

@@ -11,7 +11,7 @@ class TeacherController {
         } catch(error) {
             res
                 .status(500)
-                .json({message: "Something went wrong!", error:error.message });
+                .json({message: "Error while creating teacher!", error:error.message });
         }
     }
     async read(req, res){ 
@@ -21,7 +21,7 @@ class TeacherController {
         }catch(error){
             res
                 .status(500)
-                .json({message: "Something went wrong!"})
+                .json({message: "Error while creating teacher!"})
         }
     }
     
@@ -39,7 +39,7 @@ class TeacherController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating teacher!", error: error.message});
         }
     }
     
@@ -57,7 +57,7 @@ class TeacherController {
         } catch (error) {
             res
                 .status(500)
-                .json({ message: "Something went wrong!", error: error.message});
+                .json({ message: "Error while creating teacher!", error: error.message});
         }
     }
 }
