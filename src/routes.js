@@ -91,7 +91,6 @@ routes.put('/users/:id',UserValidator.update, UserController.update);
 
 
 
-
 routes.post("/login", AuthValidator.login, AuthController.login);
 
 module.exports = routes;

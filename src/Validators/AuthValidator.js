@@ -6,7 +6,7 @@ const login = validateRequest({
         email: z
             .string({ required_error: "Email is required"})
             .email("Invalid email"),
-        senha: z.string({ required_error: "Password is required"}),
+        password: z.string({ required_error: "Password is required"}),
     }),
 });
 
