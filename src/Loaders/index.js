@@ -1,9 +1,9 @@
-const startDB = require("./mongodb");
+import startDB from "./mongodb.js";
 
-class Loaders{
-    start(){
-        startDB();
-    }
+class Loaders {
+  start() {
+    startDB();
+  }
 }
 
-module.exports = new Loaders();
+export default new Loaders();

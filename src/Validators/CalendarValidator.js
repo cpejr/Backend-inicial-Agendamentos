@@ -1,30 +1,35 @@
-const mongoose = require("mongoose");
-const { z } = require("zod");
-const { validateRequest } = require("zod-express-middleware");
+import mongoose from "mongoose";
+import { z } from "zod";
+import { validateRequest } from "zod-express-middleware";
 
 const create = validateRequest({
-    body: z.object({
-        teacher_id: z.string().refine(mongoose.isValidObjectId, "Invalid teacher id"),
-    }),
+  body: z.object({
+    teacher_id: z
+      .string()
+      .refine(mongoose.isValidObjectId, "Invalid teacher id"),
+  }),
 });
 
 const destroy = validateRequest({
-    params: z.object({
-        id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
-    }),
+  params: z.object({
+    id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
+  }),
 });
 
 const update = validateRequest({
-    body: z.object({
-        teacher_id: z.string().refine(mongoose.isValidObjectId, "Invalid teacher id").optional(),
-    }),
-    params: z.object({
-        id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
-    }),
+  body: z.object({
+    teacher_id: z
+      .string()
+      .refine(mongoose.isValidObjectId, "Invalid teacher id")
+      .optional(),
+  }),
+  params: z.object({
+    id: z.string().refine(mongoose.isValidObjectId, "Invalid id"),
+  }),
 });
 
-module.exports = {
-    create,
-    destroy,
-    update,
+export default {
+  create,
+  destroy,
+  update,
 };

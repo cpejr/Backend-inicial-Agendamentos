@@ -1,37 +1,37 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const Schema = mongoose.Schema;
 
 const TeacherSchema = new Schema({
-    email: {
-        type: String,
-        unique: true,
-    },
-    password: String,
-    name: {
-        type: String,
-        select: false,
-    },
-    position: String,
-    status: String
-})
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: String,
+  name: {
+    type: String,
+    select: false,
+  },
+  position: String,
+  status: String,
+});
 
-TeacherSchema.pre("save", async function(next) {
-    const user = this
+TeacherSchema.pre("save", async function (next) {
+  const user = this;
 
-    if(user.isModified("password")) {
-        const salt = await bcrypt.genSalt();
-        const hash = await bcrypt.hash(user.password, salt);
+  if (user.isModified("password")) {
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(user.password, salt);
 
-        user.password = hash;
+    user.password = hash;
 
-        console.log({ salt, hash });
-    }
-    
-    next()
-})
+    console.log({ salt, hash });
+  }
 
-const TeacherModel = mongoose.model('teachers', TeacherSchema);
+  next();
+});
 
-module.exports = TeacherModel;
+const TeacherModel = mongoose.model("teachers", TeacherSchema);
+
+export default TeacherModel;

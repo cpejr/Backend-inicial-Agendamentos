@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-async function startDB(){
+async function startDB() {
+  await mongoose.connect(
+    "mongodb+srv://rafaelsoares:Wf7y5kk3D5WaoPuo@cluster0.dttm1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  );
 
-    await mongoose.connect('mongodb+srv://rafaelsoares:Wf7y5kk3D5WaoPuo@cluster0.dttm1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
-
-    console.log("Initialized database");
+  console.log("Initialized database");
 }
 
-module.exports = startDB;
+export default startDB;

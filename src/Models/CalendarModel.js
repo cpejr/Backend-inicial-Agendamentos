@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 const CalendarSchema = new Schema({
-    teacher_id: {
-        type: Schema.Types.ObjectId,
-        ref: "teachers",
-        required: true,
-    }
+  teacher_id: {
+    type: Schema.Types.ObjectId,
+    ref: "teachers",
+    required: true,
+  },
 });
 
-const CalendarModel = mongoose.model('calendars', CalendarSchema);
+const CalendarModel = mongoose.model("calendars", CalendarSchema);
 
-module.exports = CalendarModel;
+export default CalendarModel;
