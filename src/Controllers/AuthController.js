@@ -5,30 +5,32 @@ import jwt from "jsonwebtoken";
 class AuthController {
   async login(req, res) {
     try {
-      const { email, senha } = req.body;
-      const foundUser = await UserModel.findOne({ email }).select("+senha");
-      if (!foundUser)
+      const { email, password } = req.body;
+
+      const foundUser = await UserModel.findOne({ email }).select("+password");
+
+      if (!foundUser) {
         return res.status(403).json({ message: "Email or password not found" });
+      }
 
-      const isMatch = await bcrypt.compare(senha, foundUser.senha);
-      if (!isMatch)
+      const isMatch = await bcrypt.compare(password, foundUser.password);
+
+      if (!isMatch) {
         return res.status(403).json({ message: "Invalid email or password" });
+      }
 
-      const { senha: hashedPassword, ...payload } = foundUser.toObject();
+      const { password: _, ...payload } = foundUser.toObject();
 
-      const token = await jwt.sign(
-        {
-          payload,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRE_IN }
+      const token = jwt.sign(
+        { payload },
+        process.env.JWT_SECRET || "default_secret",       
+        { expiresIn: process.env.JWT_EXPIRE_IN || "1h" }  
       );
 
-      res.status(200).json({ token });
+      return res.status(200).json({ token });
+
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error while creating user", error: error.message });
+      return res.status(500).json({ message: "Error while logging in user", error: error.message });
     }
   }
 }
