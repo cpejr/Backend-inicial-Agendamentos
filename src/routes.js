@@ -1,4 +1,6 @@
 import { Router } from "express";
+//Middlewares
+import verifyJwt from "./Middlewares/VerifyJwt.js";
 
 //Controllers
 import SchedulingController from "./Controllers/SchedulingController.js";
@@ -25,6 +27,7 @@ import PlanValidator from "./Validators/PlanValidator.js";
 import TeacherValidator from "./Validators/TeacherValidator.js";
 import SessionValidator from "./Validators/SessionValidator.js";
 import UserValidator from "./Validators/UserValidator.js";
+import authMiddleware from "./Middlewares/VerifyJwt.js";
 
 const routes = Router();
 
@@ -128,7 +131,7 @@ routes.delete(
 //users
 routes.post("/users", UserValidator.create, UserController.create);
 routes.get("/users", UserController.read);
-routes.delete("/users/:id", UserValidator.destroy, UserController.delete);
+routes.delete("/users/:id",  UserValidator.destroy, UserController.delete);
 routes.put("/users/:id", UserValidator.update, UserController.update);
 
 routes.post("/login", AuthValidator.login, AuthController.login);

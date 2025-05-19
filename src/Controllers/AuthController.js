@@ -27,7 +27,14 @@ class AuthController {
         { expiresIn: process.env.JWT_EXPIRE_IN || "1h" }  
       );
 
-      return res.status(200).json({ token });
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true, 
+        sameSite: 'Strict',
+        maxAge: 3600000, // one hour
+      });
+
+      return res.status(200).json({ message: "Logged in successfully" });
 
     } catch (error) {
       return res.status(500).json({ message: "Error while logging in user", error: error.message });
