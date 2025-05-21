@@ -1,6 +1,6 @@
 import { Router } from "express";
 //Middlewares
-import verifyJwt from "./Middlewares/VerifyJwt.js";
+
 
 //Controllers
 import SchedulingController from "./Controllers/SchedulingController.js";
@@ -27,7 +27,7 @@ import PlanValidator from "./Validators/PlanValidator.js";
 import TeacherValidator from "./Validators/TeacherValidator.js";
 import SessionValidator from "./Validators/SessionValidator.js";
 import UserValidator from "./Validators/UserValidator.js";
-import authMiddleware from "./Middlewares/VerifyJwt.js";
+
 
 const routes = Router();
 
