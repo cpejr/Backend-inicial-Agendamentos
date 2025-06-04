@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-function authMiddleware(req, res, next) {
+function verifyJWT(req, res, next) {
   const token = req?.cookies?.token;
 
   if (!token) {
@@ -9,7 +9,7 @@ function authMiddleware(req, res, next) {
 
   jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
     if (error) {
-      return res.status(403).json({ message: "token inválido" });
+      return res.status(403).json({ message: "token inválido ou expirado" });
     }
 
     req.userId = user.user?._id;
@@ -19,4 +19,4 @@ function authMiddleware(req, res, next) {
   });
 }
 
-export default authMiddleware;
+export default verifyJWT;
