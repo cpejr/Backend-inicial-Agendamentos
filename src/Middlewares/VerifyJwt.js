@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-function verifyJWT(req, res, next) {
+function verifyJwt(req, res, next) {
   const token = req?.cookies?.token;
 
   if (!token) {
@@ -19,4 +19,4 @@ function verifyJWT(req, res, next) {
   });
 }
 
-export default verifyJWT;
+export default verifyJwt;
