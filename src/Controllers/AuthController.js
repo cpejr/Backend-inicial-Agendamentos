@@ -21,27 +21,73 @@ class AuthController {
 
       const { password: hashedPassword, ...payload } = foundUser.toObject();
 
-      const expiresIn = process.env.JWT_EXPIRE_IN || "1d";
+      const accessToken = jwt.sign({ payload }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE_IN || "15m", //colocar o tempo que ache necessario nao esta no .env
+      });
 
-      const token = await jwt.sign(
-        { payload },
-        process.env.JWT_SECRET,
-        { expiresIn }
-      );
+      const refreshToken = jwt.sign({ payload }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_REFRESH_EXPIRE_IN || "1d", //colocar o tempo que se ache necessario 
+      });
 
-      res.cookie("token", token, {
+      res.cookie("token", accessToken, {
         httpOnly: true,
-        secure: false, 
+        secure: false,
         sameSite: "lax",
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 15 * 60 * 1000, 
+      });
+
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge:  24 * 60 * 60 * 1000, 
       });
 
       res.status(200).json({ message: "Login successful" });
     } catch (error) {
       console.error("Erro no login:", error);
-      res
-        .status(500)
-        .json({ message: "Error while creating user", error: error.message });
+      res.status(500).json({ message: "Error while logging in", error: error.message });
+    }
+  }
+
+  async refreshToken(req, res) {
+    try {
+      const token = req.cookies.refreshToken;
+
+      if (!token) {
+        return res.status(401).json({ message: "Refresh token nao fornecido" });
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      const newAccessToken = jwt.sign(
+        { payload: decoded.payload },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRE_IN || "15m" }
+      );
+
+      res.cookie("token", newAccessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge: 15 * 60 * 1000, 
+      });
+
+      res.status(200).json({ message: "Token renovado" });
+    } catch (error) {
+      console.error("Erro ao renovar token:", error);
+      res.status(401).json({ message: "Refresh token invàlido" });
+    }
+  }
+
+  async logout(req, res) {
+    try {
+      res.clearCookie("token");
+      res.clearCookie("refreshToken");
+      res.status(200).json({ message: "Deslogado" });
+    } catch (error) {
+      console.error("Erro no logout:", error);
+      res.status(500).json({ message: "Login Falho", error: error.message });
     }
   }
 }
