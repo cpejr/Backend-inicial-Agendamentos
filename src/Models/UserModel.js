@@ -23,6 +23,18 @@ const UserSchema = new Schema({
     required: true,
     enum: [0, 1, 2],
   },
+  imageURL: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+  type: {
+    type: Boolean,
+    required: false,
+		default: false,
+    trim: true,
+  },
+
 });
 
 UserSchema.pre("save", async function (next) {
